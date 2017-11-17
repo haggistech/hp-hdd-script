@@ -1,4 +1,18 @@
-#!/bin/bash
+#!/bin/bash -       
+
+#==========================================================================================================================
+#
+# Title          : HyperPie Hard Drive Script
+# Description    : This script will detect an external Hard Drive plugged into you pi and mount it under /home/pi/Retropie/
+# Author	 : Mik McLean
+# Date           : 20171117
+# Version        : 0.1    
+# Usage		 : ./hp-hdd-script.sh
+# Notes          : Install Vim and Emacs to use this script.
+#
+#==========================================================================================================================
+
+
 sudo grep UUID /etc/fstab > /dev/null 2>&1
 if [ $? -eq 0 ] ; then
 echo "It seems you already have an external drive mapped. Please run the "Remove Drive Expansion" script."
