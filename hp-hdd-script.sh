@@ -58,8 +58,9 @@ sudo sh -c "echo 'UUID=$usbuuid  /home/pi/RetroPie      $destfs    rw,exec,uid=p
 sleep 5
 fi
 
-sudo mount -a
-
+echo "Rebooting now...."
+sleep 3
+sudo reboot
 echo
 echo "Drive Mount successful"
 echo
