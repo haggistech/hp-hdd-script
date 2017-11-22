@@ -24,17 +24,42 @@ fi
 #mkdir /home/pi/.work > /dev/null 2>&1
 
 findhdd=`df |grep media |awk '{print $1 }'|wc -l`
+
 if [ $findhdd -eq 0 ] ; then
 echo "Please Plug in an External Drive"
 sleep 2
 exit
-else
-echo "External drive found, Preparing....."
+fi
+
+
+if [ $findhdd -eq 1 ] ; then
+clear
+df |grep 'media/'
+echo
+echo
+echo "1 Partition Found, Continuing...."
 extdrive=`df |grep media |awk '{print $1 }'`
 usbdest=`df |grep media |awk '{print $6 }'`
+echo
+sleep 2
+else
+clear
+echo "More than one partiton found on device..."
+echo
+df |grep 'media/'
+echo
+echo
+printf "Please select a Partition to use:\n\n"; select d in $(df |grep 'media/' |awk '{print $1 }');  do test -n "$d" && break; echo ">>> Invalid Selection"; done; extdrive="$d"; usbdest=`df |grep "$d" |awk '{print $6 }'`
+fi
+
+echo $extdrive
+echo $usbdest
+
+
+
+
 sudo mv -v /home/pi/RetroPie/* $usbdest/
 sleep 2
-fi
 
 destfs=`df -T | grep $extdrive | awk '{print $2}'`
 
